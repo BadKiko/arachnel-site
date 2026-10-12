@@ -9,24 +9,34 @@ light/dark theme and RU/EN language are switchable and remembered in the browser
 ## Run locally
 
 ```sh
+node build.mjs            # regenerate index.html, en/index.html, sitemap.xml, robots.txt
 python3 -m http.server 8000
 # open http://localhost:8000
 ```
+
+The two languages are separate static pages, `/` (Russian) and `/en/` (English), built from
+`src/template.html` and the strings in `src/i18n.mjs`. A first visit to `/` from a non-Russian browser
+is sent to `/en/` once; the RU/EN switch remembers the choice.
 
 ## Layout
 
 | Path | What |
 |---|---|
-| `index.html` | All sections and the icon sprite |
+| `src/template.html`, `src/i18n.mjs`, `build.mjs` | Source of the two pages and the build script |
+| `index.html`, `en/index.html` | Generated pages (committed, served as is) |
 | `styles.css` | Design tokens (dark and light), components, motion |
-| `app.js` | RU/EN strings, accent picker, expressive shapes, reveal, release info |
+| `app.js` | Accent picker, expressive shapes, reveal, release info |
 | `assets/img/*.webp` | App screenshots (sample data) |
 | `assets/fonts/` | Roboto Flex (variable weight and width), self-hosted |
 
 ## Deploy
 
-`.github/workflows/pages.yml` publishes the repo root to GitHub Pages on every push to `main`.
-Enable it once under *Settings → Pages → Source: GitHub Actions*.
+Served at https://arachnel.badkiko.ru by an nginx container behind Traefik on the VPS
+(`/opt/arachnel-site`). To publish a change: push to `main`, then on the VPS run
+
+```sh
+/opt/arachnel-site/update.sh
+```
 
 ## Notes
 
