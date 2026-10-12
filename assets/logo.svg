@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Arachnel">
+  <g fill="none" stroke="currentColor" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 256V64M256 256l136-136M256 256h192M256 256l136 136M256 256v192M256 256L120 392M256 256H64M256 256L120 120"/>
+    <path d="M256 168l62 26 26 62-26 62-62 26-62-26-26-62 26-62z"/>
+    <path d="M256 112l104 44 44 100-44 100-104 44-100-44-44-100 44-100z"/>
+    <path d="M256 64l136 56 56 136-56 136-136 56-136-56-56-136 56-136z"/>
+  </g>
+  <circle cx="256" cy="256" r="26" fill="currentColor"/>
+</svg>

@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arachnel — лаунчер игр для Windows и Linux</title>
+  <meta name="description" content="Arachnel — лаунчер игр для Windows и Linux. Выбрал игру, скачал, нажал «Играть». Каталог, подборки, библиотека и плагины в стиле Material 3 Expressive.">
+  <meta name="theme-color" content="#161618">
+  <meta property="og:title" content="Arachnel — лаунчер игр">
+  <meta property="og:description" content="Выбрал игру, скачал, нажал «Играть». Для Windows и Linux.">
+  <meta property="og:image" content="assets/img/catalog.webp">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/roboto-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Theme and language before first paint: no flash of the wrong one.
+    (function () {
+      try {
+        var t = localStorage.getItem("ara-theme");
+        if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        document.documentElement.dataset.theme = t;
+        var l = localStorage.getItem("ara-lang") || ((navigator.language || "en").toLowerCase().indexOf("ru") === 0 ? "ru" : "en");
+        document.documentElement.lang = l;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="skip">К содержимому</a>
+
+  <!-- ============ Navigation ============ -->
+  <header class="nav" id="nav">
+    <a class="brand" href="#top" aria-label="Arachnel">
+      <span class="brand-mark"><svg><use href="#web"/></svg></span>
+      <span class="brand-name">Arachnel</span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#how" data-i18n="nav.how">Как это работает</a>
+      <a href="#features" data-i18n="nav.features">Возможности</a>
+      <a href="#screens" data-i18n="nav.screens">Скриншоты</a>
+      <a href="#plugins" data-i18n="nav.plugins">Плагины</a>
+      <a href="#faq" data-i18n="nav.faq">Вопросы</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="seg" role="group" aria-label="Language">
+        <button class="seg-btn" data-lang="ru" aria-pressed="true">RU</button>
+        <button class="seg-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="icon-btn" id="themeBtn" aria-label="Theme" title="Theme">
+        <svg class="i-moon"><use href="#i-moon"/></svg><svg class="i-sun"><use href="#i-sun"/></svg>
+      </button>
+      <a class="btn btn-filled btn-sm nav-cta" href="#download" data-i18n="nav.download">Скачать</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ Hero ============ -->
+    <section class="hero" id="top">
+      <div class="hero-bg" aria-hidden="true">
+        <svg class="blob b1" data-shape="cookie9" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <svg class="blob b2" data-shape="clover4" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <svg class="blob b3" data-shape="burst" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <svg class="web" viewBox="0 0 512 512"><use href="#web"/></svg>
+      </div>
+
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span class="dot"></span><span data-i18n="hero.eyebrow">Лаунчер игр · Windows и Linux</span></p>
+        <h1 class="display"><span class="wght" data-i18n="hero.title">Выбрал.<br>Скачал.<br>Играй.</span></h1>
+        <p class="lead" data-i18n="hero.lead">Arachnel собирает каталог, загрузки и библиотеку в одном окне. На Windows всё просто запускается, на Linux лаунчер сам подтянет Proton и всё нужное.</p>
+        <div class="cta">
+          <a class="btn btn-filled btn-lg" id="ctaMain" href="https://github.com/BadKiko/Arachnel/releases/latest/download/Arachnel-Setup.exe">
+            <svg class="ic"><use href="#i-download"/></svg>
+            <span id="ctaMainText" data-i18n="cta.win">Скачать для Windows</span>
+          </a>
+          <a class="btn btn-tonal" id="ctaAlt" href="https://github.com/BadKiko/Arachnel/releases/latest/download/Arachnel-x86_64.AppImage">
+            <svg class="ic"><use href="#i-linux"/></svg>
+            <span id="ctaAltText" data-i18n="cta.linux">Linux · AppImage</span>
+          </a>
+        </div>
+        <p class="meta"><span class="chip" id="verChip">v0.2.0</span><a class="link" href="https://github.com/BadKiko/Arachnel/releases" data-i18n="cta.all">Все релизы</a></p>
+      </div>
+
+      <figure class="hero-shot reveal" id="tilt">
+        <div class="window">
+          <div class="window-bar" aria-hidden="true"><i></i><i></i><i></i><span>Arachnel</span></div>
+          <img src="assets/img/catalog.webp" width="1450" height="900" alt="Каталог Arachnel: сетка игр, сортировка по дате добавления" data-i18n-alt="alt.catalog" fetchpriority="high">
+        </div>
+        <div class="float f1"><svg class="ic"><use href="#i-search"/></svg><span data-i18n="float.search">Умный поиск</span></div>
+        <div class="float f2"><svg class="ic"><use href="#i-play"/></svg><span data-i18n="float.play">Играть</span></div>
+      </figure>
+    </section>
+
+    <!-- ============ Marquee ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span data-i18n="m.catalog">Каталог</span><svg data-shape="cookie6" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <span data-i18n="m.discover">Подборки</span><svg data-shape="clover4" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <span data-i18n="m.library">Библиотека</span><svg data-shape="burst" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <span data-i18n="m.friends">Друзья</span><svg data-shape="cookie9" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <span data-i18n="m.downloads">Загрузки</span><svg data-shape="cookie12" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <span data-i18n="m.plugins">Плагины</span><svg data-shape="clover8" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <span data-i18n="m.catalog">Каталог</span><svg data-shape="cookie6" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <span data-i18n="m.discover">Подборки</span><svg data-shape="clover4" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <span data-i18n="m.library">Библиотека</span><svg data-shape="burst" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <span data-i18n="m.friends">Друзья</span><svg data-shape="cookie9" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <span data-i18n="m.downloads">Загрузки</span><svg data-shape="cookie12" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+        <span data-i18n="m.plugins">Плагины</span><svg data-shape="clover8" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg>
+      </div>
+    </div>
+
+    <!-- ============ How ============ -->
+    <section class="section" id="how">
+      <header class="section-head reveal">
+        <p class="eyebrow"><span class="dot"></span><span data-i18n="how.eyebrow">Plug and play</span></p>
+        <h2 class="h2" data-i18n="how.title">Три шага, и вы в игре</h2>
+        <p class="lead" data-i18n="how.lead">Никаких настроек системы и ручной возни с запуском.</p>
+      </header>
+      <ol class="steps">
+        <li class="step reveal">
+          <div class="step-shape"><svg data-shape="cookie9" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg><svg class="ic"><use href="#i-storefront"/></svg></div>
+          <span class="step-n">01</span>
+          <h3 data-i18n="how.s1.t">Выберите игру</h3>
+          <p data-i18n="how.s1.d">Каталог с поиском, который прощает опечатки и понимает кириллицу и латиницу. Фильтры и сортировка под рукой.</p>
+        </li>
+        <li class="step reveal" style="--d:.08s">
+          <div class="step-shape"><svg data-shape="clover4" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg><svg class="ic"><use href="#i-download"/></svg></div>
+          <span class="step-n">02</span>
+          <h3 data-i18n="how.s2.t">Скачайте</h3>
+          <p data-i18n="how.s2.d">Загрузки с понятным прогрессом, установка в выбранную папку, обновления игр в библиотеке.</p>
+        </li>
+        <li class="step reveal" style="--d:.16s">
+          <div class="step-shape"><svg data-shape="burst" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg><svg class="ic"><use href="#i-play"/></svg></div>
+          <span class="step-n">03</span>
+          <h3 data-i18n="how.s3.t">Нажмите «Играть»</h3>
+          <p data-i18n="how.s3.d">На Windows игра просто стартует. На Linux Arachnel сам настроит Proton, и вам не нужно трогать систему.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ Features (bento) ============ -->
+    <section class="section" id="features">
+      <header class="section-head reveal">
+        <p class="eyebrow"><span class="dot"></span><span data-i18n="f.eyebrow">Возможности</span></p>
+        <h2 class="h2" data-i18n="f.title">Всё нужное, и ничего лишнего</h2>
+      </header>
+      <div class="bento">
+        <article class="tile t-search reveal">
+          <h3 data-i18n="f.search.t">Поиск, который понимает</h3>
+          <p data-i18n="f.search.d">Опечатки, раскладка и кириллица вместо латиницы: ищите так, как думаете.</p>
+          <div class="demo-search" aria-hidden="true">
+            <div class="pill"><svg class="ic"><use href="#i-search"/></svg><span class="typed" id="typed"></span><i class="caret"></i></div>
+            <div class="hits"><span class="hit">The Witcher 3</span><span class="hit">Witch It</span><span class="hit">Witchfire</span></div>
+          </div>
+        </article>
+
+        <article class="tile t-discover reveal" style="--d:.06s">
+          <div class="tile-img"><img src="assets/img/discover.webp" width="1450" height="900" alt="Подборки" data-i18n-alt="alt.discover" loading="lazy"></div>
+          <h3 data-i18n="f.discover.t">Подборки как лента</h3>
+          <p data-i18n="f.discover.d">Одна игра на экран: трейлер, жанры, «Играть» и «Не моё».</p>
+        </article>
+
+        <article class="tile t-linux reveal" style="--d:.1s">
+          <div class="tile-ic"><svg data-shape="cookie6" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg><svg class="ic"><use href="#i-linux"/></svg></div>
+          <h3 data-i18n="f.linux.t">Linux без боли</h3>
+          <p data-i18n="f.linux.d">Proton подтягивается сам. Лаунчер ставится как AppImage, без пакетов и зависимостей.</p>
+        </article>
+
+        <article class="tile t-theme reveal" style="--d:.14s">
+          <h3 data-i18n="f.theme.t">Ваши цвета</h3>
+          <p data-i18n="f.theme.d">Тёмная и светлая тема, палитры и цвет акцента. Попробуйте прямо здесь.</p>
+          <div class="swatches" id="swatches" role="radiogroup" aria-label="Accent"></div>
+        </article>
+
+        <article class="tile t-plugins reveal" style="--d:.18s">
+          <h3 data-i18n="f.plugins.t">Источники через плагины</h3>
+          <p data-i18n="f.plugins.d">В лаунчере нет встроенного каталога: плагин подключает источник и отвечает за скачивание, установку и запуск.</p>
+          <div class="plug-row" aria-hidden="true"><span class="plug"><svg class="ic"><use href="#i-extension"/></svg>Store</span><span class="plug"><svg class="ic"><use href="#i-extension"/></svg>Files</span><span class="plug plug-add"><svg class="ic"><use href="#i-add"/></svg></span></div>
+        </article>
+
+        <article class="tile t-friends reveal" style="--d:.22s">
+          <div class="avatars" aria-hidden="true"><i style="--h:265">A</i><i style="--h:20">K</i><i style="--h:150">M</i><i style="--h:330">S</i></div>
+          <h3 data-i18n="f.friends.t">Друзья</h3>
+          <p data-i18n="f.friends.d">Добавляйте друзей по коду и видьте, кто онлайн и во что играет.</p>
+        </article>
+
+        <article class="tile t-keys reveal" style="--d:.26s">
+          <h3 data-i18n="f.keys.t">Для клавиатуры</h3>
+          <p data-i18n="f.keys.d">Быстрый поиск и переключение разделов без мыши.</p>
+          <div class="keys" aria-hidden="true"><kbd>Ctrl</kbd><kbd>K</kbd><kbd>Ctrl</kbd><kbd>1…6</kbd><kbd>Esc</kbd></div>
+        </article>
+
+        <article class="tile t-lang reveal" style="--d:.3s">
+          <div class="big-lang" aria-hidden="true"><span>Aa</span><span>Яя</span></div>
+          <h3 data-i18n="f.lang.t">Русский и English</h3>
+          <p data-i18n="f.lang.d">Интерфейс переведён, переводы можно улучшать на Weblate.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ Screens ============ -->
+    <section class="section" id="screens">
+      <header class="section-head reveal">
+        <p class="eyebrow"><span class="dot"></span><span data-i18n="s.eyebrow">Скриншоты</span></p>
+        <h2 class="h2" data-i18n="s.title">Посмотрите изнутри</h2>
+      </header>
+      <div class="shots reveal">
+        <div class="chips" role="tablist" aria-label="Screenshots" id="shotTabs">
+          <button class="chip-btn" role="tab" aria-selected="true" data-shot="catalog" data-i18n="s.catalog">Каталог</button>
+          <button class="chip-btn" role="tab" aria-selected="false" data-shot="filters" data-i18n="s.filters">Фильтры</button>
+          <button class="chip-btn" role="tab" aria-selected="false" data-shot="discover" data-i18n="s.discover">Подборки</button>
+          <button class="chip-btn" role="tab" aria-selected="false" data-shot="settings" data-i18n="s.settings">Настройки</button>
+        </div>
+        <div class="window big">
+          <div class="window-bar" aria-hidden="true"><i></i><i></i><i></i><span>Arachnel</span></div>
+          <div class="stack" id="shotStack">
+            <img class="on" data-shot="catalog" src="assets/img/catalog.webp" width="1450" height="900" alt="Каталог" data-i18n-alt="alt.catalog" loading="lazy">
+            <img data-shot="filters" src="assets/img/filters.webp" width="1450" height="900" alt="Фильтры" data-i18n-alt="alt.filters" loading="lazy">
+            <img data-shot="discover" src="assets/img/discover.webp" width="1450" height="900" alt="Подборки" data-i18n-alt="alt.discover" loading="lazy">
+            <img data-shot="settings" src="assets/img/settings.webp" width="1450" height="900" alt="Настройки" data-i18n-alt="alt.settings" loading="lazy">
+          </div>
+        </div>
+        <p class="note" data-i18n="s.note">На скриншотах тестовые данные.</p>
+      </div>
+    </section>
+
+    <!-- ============ Plugins ============ -->
+    <section class="section" id="plugins">
+      <div class="split">
+        <div class="reveal">
+          <p class="eyebrow"><span class="dot"></span><span data-i18n="p.eyebrow">Плагины</span></p>
+          <h2 class="h2" data-i18n="p.title">Подключите источник за минуту</h2>
+          <p class="lead" data-i18n="p.lead">Плагин это маленькая надстройка к источнику. Он наполняет каталог и берёт на себя скачивание, установку и запуск.</p>
+          <ol class="mini-steps">
+            <li><b>1</b><span data-i18n="p.s1">Откройте «Настройки → Плагины → Магазин плагинов»</span></li>
+            <li><b>2</b><span data-i18n="p.s2">Установите плагин из списка, рекомендованные сверху</span></li>
+            <li><b>3</b><span data-i18n="p.s3">Игры появятся в «Каталоге»</span></li>
+          </ol>
+          <div class="cta">
+            <a class="btn btn-tonal" href="https://github.com/BadKiko/Arachnel/blob/master/docs/PLUGIN_SDK.md" data-i18n="p.sdk">Написать свой плагин</a>
+          </div>
+        </div>
+        <div class="reveal" style="--d:.1s">
+          <div class="plug-card">
+            <div class="plug-card-head"><svg class="ic"><use href="#i-storefront"/></svg><span data-i18n="p.store">Магазин плагинов</span></div>
+            <div class="plug-item"><span class="pi"><svg class="ic"><use href="#i-extension"/></svg></span><div><b data-i18n="p.i1">Источник игр</b><small data-i18n="p.i1d">Каталог, загрузка, установка, запуск</small></div><span class="chip chip-p" data-i18n="p.rec">Рекомендуем</span></div>
+            <div class="plug-item"><span class="pi"><svg class="ic"><use href="#i-extension"/></svg></span><div><b data-i18n="p.i2">Ещё один источник</b><small data-i18n="p.i2d">Устанавливается так же</small></div><span class="chip" data-i18n="p.install">Установить</span></div>
+            <div class="plug-item"><span class="pi"><svg class="ic"><use href="#i-file"/></svg></span><div><b data-i18n="p.i3">Установить из файла…</b><small>.arach</small></div><span class="chip">→</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Download ============ -->
+    <section class="section" id="download">
+      <header class="section-head center reveal">
+        <p class="eyebrow"><span class="dot"></span><span data-i18n="d.eyebrow">Скачать</span></p>
+        <h2 class="h2" data-i18n="d.title">Arachnel для вашей системы</h2>
+        <p class="lead" data-i18n="d.lead">Свежая сборка всегда на GitHub Releases. Контрольные суммы лежат рядом.</p>
+      </header>
+      <div class="dl-grid">
+        <article class="dl reveal" id="dlWin">
+          <div class="dl-shape"><svg data-shape="cookie9" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg><svg class="ic"><use href="#i-windows"/></svg></div>
+          <h3>Windows</h3>
+          <p data-i18n="d.win">Установщик для Windows 10 и 11</p>
+          <a class="btn btn-filled btn-lg" href="https://github.com/BadKiko/Arachnel/releases/latest/download/Arachnel-Setup.exe"><svg class="ic"><use href="#i-download"/></svg><span data-i18n="d.getwin">Скачать .exe</span></a>
+          <small class="size" id="sizeWin">Setup.exe</small>
+        </article>
+        <article class="dl reveal" id="dlLinux" style="--d:.08s">
+          <div class="dl-shape"><svg data-shape="clover4" viewBox="-1.05 -1.05 2.1 2.1"><path/></svg><svg class="ic"><use href="#i-linux"/></svg></div>
+          <h3>Linux</h3>
+          <p data-i18n="d.linux">AppImage для x86_64: сделайте исполняемым и запускайте</p>
+          <a class="btn btn-filled btn-lg" href="https://github.com/BadKiko/Arachnel/releases/latest/download/Arachnel-x86_64.AppImage"><svg class="ic"><use href="#i-download"/></svg><span data-i18n="d.getlinux">Скачать AppImage</span></a>
+          <small class="size" id="sizeLinux">x86_64.AppImage</small>
+        </article>
+      </div>
+      <p class="center-note reveal"><a class="link" href="https://github.com/BadKiko/Arachnel/releases/latest/download/checksums.sha256" data-i18n="d.sums">Контрольные суммы SHA-256</a> · <a class="link" href="https://github.com/BadKiko/Arachnel/releases" data-i18n="cta.all">Все релизы</a> · <a class="link" href="https://github.com/BadKiko/Arachnel/blob/master/CONTRIBUTING.md" data-i18n="d.build">Сборка из исходников</a></p>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section" id="faq">
+      <header class="section-head reveal">
+        <p class="eyebrow"><span class="dot"></span><span data-i18n="q.eyebrow">Вопросы</span></p>
+        <h2 class="h2" data-i18n="q.title">Коротко о главном</h2>
+      </header>
+      <div class="faq">
+        <details class="reveal"><summary data-i18n="q.1q">Есть ли в Arachnel каталог игр?</summary><p data-i18n="q.1a">Встроенного каталога нет. Источники подключаются плагинами: плагин заполняет «Каталог» и отвечает за скачивание, установку и запуск.</p></details>
+        <details class="reveal"><summary data-i18n="q.2q">Как это работает на Linux?</summary><p data-i18n="q.2a">Лаунчер сам подтягивает Proton и всё, что нужно для запуска, чтобы вам не пришлось настраивать систему вручную.</p></details>
+        <details class="reveal"><summary data-i18n="q.3q">Запустится ли любая игра?</summary><p data-i18n="q.3a">Нет. Игры с DRM или античитом могут не работать. Это зависит от самой игры и источника.</p></details>
+        <details class="reveal"><summary data-i18n="q.4q">Куда сообщать об ошибках и идеях?</summary><p><span data-i18n="q.4a">В</span> <a class="link" href="https://github.com/BadKiko/Arachnel/issues">GitHub Issues</a>.</p></details>
+        <details class="reveal"><summary data-i18n="q.5q">Можно ли помочь с переводом?</summary><p><span data-i18n="q.5a">Да, переводы живут на</span> <a class="link" href="https://hosted.weblate.org/engage/arachnel/">Weblate</a>.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="footer">
+    <div class="foot-top">
+      <div class="foot-mark"><svg><use href="#web"/></svg></div>
+      <div class="foot-word" aria-hidden="true">Arachnel</div>
+    </div>
+    <div class="foot-cols">
+      <div>
+        <h4 data-i18n="ft.proj">Проект</h4>
+        <a href="https://github.com/BadKiko/Arachnel">GitHub</a>
+        <a href="https://github.com/BadKiko/Arachnel/releases">Releases</a>
+        <a href="https://github.com/BadKiko/Arachnel/issues">Issues</a>
+      </div>
+      <div>
+        <h4 data-i18n="ft.docs">Документация</h4>
+        <a href="https://github.com/BadKiko/Arachnel/blob/master/docs/PLUGIN_SDK.md">Plugin SDK</a>
+        <a href="https://github.com/BadKiko/Arachnel/blob/master/CONTRIBUTING.md">Contributing</a>
+        <a href="https://hosted.weblate.org/engage/arachnel/">Weblate</a>
+      </div>
+    </div>
+    <p class="legal" data-i18n="ft.legal">Arachnel не хранит и не распространяет игры. Плагины создают сторонние авторы: вы отвечаете за то, что устанавливаете.</p>
+  </footer>
+
+  <!-- ============ Icons ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="web" viewBox="0 0 512 512"><g fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"><path d="M256 256V64M256 256l136-136M256 256h192M256 256l136 136M256 256v192M256 256L120 392M256 256H64M256 256L120 120"/><path d="M256 168l62 26 26 62-26 62-62 26-62-26-26-62 26-62z"/><path d="M256 112l104 44 44 100-44 100-104 44-100-44-44-100 44-100z"/><path d="M256 64l136 56 56 136-56 136-136 56-136-56-56-136 56-136z"/></g><circle cx="256" cy="256" r="24" fill="currentColor"/></symbol>
+      <symbol id="i-download" viewBox="0 -960 960 960"><path fill="currentColor" d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></symbol>
+      <symbol id="i-play" viewBox="0 -960 960 960"><path fill="currentColor" d="M320-200v-560l440 280-440 280Z"/></symbol>
+      <symbol id="i-search" viewBox="0 -960 960 960"><path fill="currentColor" d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.500-75.500T120-580q0-109 75.500-184.500T380-840q109 0 184.500 75.500T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.500-52.500T560-580q0-75-52.500-127.500T380-760q-75 0-127.500 52.500T200-580q0 75 52.500 127.500T380-400Z"/></symbol>
+      <symbol id="i-storefront" viewBox="0 -960 960 960"><path fill="currentColor" d="M841-518v318q0 33-23.500 56.500T761-120H201q-33 0-56.500-23.500T121-200v-318q-23-21-35.500-54t-.5-72l42-136q8-26 28.500-43t47.500-17h556q27 0 47 16.500t29 43.500l42 136q12 39-.500 71.500T841-518Zm-272-42q27 0 41-18.500t11-41.500l-22-140h-78v148q0 21 14 36.500t34 15.500Zm-180 0q23 0 37.500-15.500T441-612v-148h-78l-22 140q-4 24 10.500 42t37.500 18Zm-178 0q18 0 31.500-12.500T263-603l22-157h-76l-42 142q-6 17 6.500 37.500T211-560Zm538 0q22 0 37-20t8-37l-42-143h-76l22 157q2 18 15.500 30.500T749-560ZM201-200h560v-282q-5 2-6.500 2H751q-27 0-47.500-9T663-518q-18 18-41 28t-49 10q-27 0-50.500-10T481-518q-18 18-41.500 28T389-480q-26 0-49-10t-41-28q-20 21-40.500 29.500T209-480h-8q-1 0-3-1.500t-3-.5v282Zm560 0H201h560Z"/></symbol>
+      <symbol id="i-linux" viewBox="0 -960 960 960"><path fill="currentColor" d="M160-160q-33 0-56.500-23.500T80-240v-480q0-33 23.500-56.500T160-800h640q33 0 56.500 23.500T880-720v480q0 33-23.500 56.500T800-160H160Zm0-80h640v-400H160v400Zm140-40-56-56 104-104-104-104 56-56 160 160-160 160Zm180 0v-80h240v80H480Z"/></symbol>
+      <symbol id="i-windows" viewBox="0 -960 960 960"><path fill="currentColor" d="M120-520v-300h340v300H120Zm0 340v-300h340v300H120Zm380-340v-300h340v300H500Zm0 340v-300h340v300H500Z"/></symbol>
+      <symbol id="i-extension" viewBox="0 -960 960 960"><path fill="currentColor" d="M352-120H200q-33 0-56.500-23.500T120-200v-152q48 0 84-30.500t36-77.500q0-47-36-77.500T120-568v-152q0-33 23.500-56.500T200-800h160q0-42 29-71t71-29q42 0 71 29t29 71h160q33 0 56.500 23.500T800-720v160q42 0 71 29t29 71q0 42-29 71t-71 29v160q0 33-23.500 56.500T720-120H568q0-50-31.500-85T460-240q-45 0-76.500 35T352-120Z"/></symbol>
+      <symbol id="i-add" viewBox="0 -960 960 960"><path fill="currentColor" d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></symbol>
+      <symbol id="i-file" viewBox="0 -960 960 960"><path fill="currentColor" d="M240-80q-33 0-56.500-23.500T160-160v-640q0-33 23.500-56.500T240-880h320l240 240v480q0 33-23.500 56.500T720-80H240Zm280-520v-200H240v640h480v-440H520Z"/></symbol>
+      <symbol id="i-moon" viewBox="0 -960 960 960"><path fill="currentColor" d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.500 1t26.500 3q-41 29-65.500 75.500T444-660q0 90 63 153t153 63q55 0 101-24.500t75-65.500q2 13 3 26.500t1 27.500q0 150-105 255T480-120Z"/></symbol>
+      <symbol id="i-sun" viewBox="0 -960 960 960"><path fill="currentColor" d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.500-58.500T280-480q0-83 58.500-141.500T480-680q83 0 141.500 58.500T680-480q0 83-58.500 141.500T480-280ZM80-440v-80h120v80H80Zm680 0v-80h120v80H760ZM440-760v-120h80v120h-80Zm0 680v-120h80v120h-80ZM256-676l-85-85 57-57 85 85-57 57Zm476 476-85-85 57-57 85 85-57 57ZM676-704l85-85 57 57-85 85-57-57ZM200-228l85-85 57 57-85 85-57-57Z"/></symbol>
+    </defs>
+  </svg>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
