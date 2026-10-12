@@ -3,24 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Arachnel — лаунчер игр для Windows и Linux</title>
+  <title>Arachnel: лаунчер игр для Windows и Linux</title>
   <meta name="description" content="Arachnel — лаунчер игр для Windows и Linux. Выбрал игру, скачал, нажал «Играть». Каталог, подборки, библиотека и плагины в стиле Material 3 Expressive.">
-  <meta name="theme-color" content="#161618">
-  <meta property="og:title" content="Arachnel — лаунчер игр">
+  <meta name="theme-color" content="#151518">
+  <link rel="canonical" href="https://arachnel.badkiko.ru/">
+  <link rel="alternate" hreflang="ru" href="https://arachnel.badkiko.ru/">
+  <link rel="alternate" hreflang="en" href="https://arachnel.badkiko.ru/en/">
+  <link rel="alternate" hreflang="x-default" href="https://arachnel.badkiko.ru/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Arachnel">
+  <meta property="og:title" content="Arachnel: лаунчер игр">
   <meta property="og:description" content="Выбрал игру, скачал, нажал «Играть». Для Windows и Linux.">
-  <meta property="og:image" content="assets/img/catalog.webp">
+  <meta property="og:url" content="https://arachnel.badkiko.ru/">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:image" content="https://arachnel.badkiko.ru/assets/img/catalog.webp">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/roboto-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script>
-    // Theme and language before first paint: no flash of the wrong one.
+    // Theme before first paint (no flash). A first visit to the Russian root from a non-Russian
+    // browser goes to /en/ once; after the language switch is used the choice is remembered.
     (function () {
       try {
         var t = localStorage.getItem("ara-theme");
         if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
         document.documentElement.dataset.theme = t;
-        var l = localStorage.getItem("ara-lang") || ((navigator.language || "en").toLowerCase().indexOf("ru") === 0 ? "ru" : "en");
-        document.documentElement.lang = l;
+        var saved = localStorage.getItem("ara-lang");
+        var isRoot = document.documentElement.lang === "ru";
+        var want = saved || ((navigator.language || "en").toLowerCase().indexOf("ru") === 0 ? "ru" : "en");
+        if (isRoot && want === "en" && !/[?&]nolang/.test(location.search)) location.replace("en/");
       } catch (e) {}
     })();
   </script>
@@ -43,8 +54,8 @@
     </nav>
     <div class="nav-actions">
       <div class="seg" role="group" aria-label="Language">
-        <button class="seg-btn" data-lang="ru" aria-pressed="true">RU</button>
-        <button class="seg-btn" data-lang="en" aria-pressed="false">EN</button>
+        <a class="seg-btn" href="./" hreflang="ru" data-lang="ru" aria-pressed="true">RU</a>
+        <a class="seg-btn" href="en/" hreflang="en" data-lang="en" aria-pressed="false">EN</a>
       </div>
       <button class="icon-btn" id="themeBtn" aria-label="Theme" title="Theme">
         <svg class="i-moon"><use href="#i-moon"/></svg><svg class="i-sun"><use href="#i-sun"/></svg>
@@ -154,7 +165,7 @@
         </article>
 
         <article class="tile t-discover reveal" style="--d:.06s">
-          <div class="tile-img"><img src="assets/img/discover.webp" width="1450" height="900" alt="Подборки" data-i18n-alt="alt.discover" loading="lazy"></div>
+          <div class="tile-img"><img src="assets/img/discover.webp" width="1450" height="900" alt="Подборки: игра с трейлером и списком «Далее»" data-i18n-alt="alt.discover" loading="lazy"></div>
           <h3 data-i18n="f.discover.t">Подборки как лента</h3>
           <p data-i18n="f.discover.d">Одна игра на экран: трейлер, жанры, «Играть» и «Не моё».</p>
         </article>
@@ -213,10 +224,10 @@
         <div class="window big">
           <div class="window-bar" aria-hidden="true"><i></i><i></i><i></i><span>Arachnel</span></div>
           <div class="stack" id="shotStack">
-            <img class="on" data-shot="catalog" src="assets/img/catalog.webp" width="1450" height="900" alt="Каталог" data-i18n-alt="alt.catalog" loading="lazy">
-            <img data-shot="filters" src="assets/img/filters.webp" width="1450" height="900" alt="Фильтры" data-i18n-alt="alt.filters" loading="lazy">
-            <img data-shot="discover" src="assets/img/discover.webp" width="1450" height="900" alt="Подборки" data-i18n-alt="alt.discover" loading="lazy">
-            <img data-shot="settings" src="assets/img/settings.webp" width="1450" height="900" alt="Настройки" data-i18n-alt="alt.settings" loading="lazy">
+            <img class="on" data-shot="catalog" src="assets/img/catalog.webp" width="1450" height="900" alt="Каталог Arachnel: сетка игр, сортировка по дате добавления" data-i18n-alt="alt.catalog" loading="lazy">
+            <img data-shot="filters" src="assets/img/filters.webp" width="1450" height="900" alt="Лист фильтров каталога" data-i18n-alt="alt.filters" loading="lazy">
+            <img data-shot="discover" src="assets/img/discover.webp" width="1450" height="900" alt="Подборки: игра с трейлером и списком «Далее»" data-i18n-alt="alt.discover" loading="lazy">
+            <img data-shot="settings" src="assets/img/settings.webp" width="1450" height="900" alt="Настройки внешнего вида" data-i18n-alt="alt.settings" loading="lazy">
           </div>
         </div>
         <p class="note" data-i18n="s.note">На скриншотах тестовые данные.</p>

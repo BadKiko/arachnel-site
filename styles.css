@@ -126,7 +126,7 @@ svg.ic { width: 1.35em; height: 1.35em; flex: none; }
 .nav-links a:hover { background: var(--s2); color: var(--on); border-radius: 14px; }
 .nav-actions { display: flex; align-items: center; gap: 8px; }
 .seg { display: inline-flex; gap: 2px; }
-.seg-btn { height: 40px; min-width: 46px; padding: 0 14px; background: var(--s2); color: var(--on-var); font-weight: 700; font-size: 13px; letter-spacing: .06em; transition: all .35s var(--spring); }
+.seg-btn { display: inline-flex; align-items: center; justify-content: center; height: 40px; min-width: 46px; padding: 0 14px; background: var(--s2); color: var(--on-var); font-weight: 700; font-size: 13px; letter-spacing: .06em; transition: all .35s var(--spring); }
 .seg-btn:first-child { border-radius: 999px 8px 8px 999px; }
 .seg-btn:last-child { border-radius: 8px 999px 999px 8px; }
 .seg-btn[aria-pressed="true"] { background: var(--sc); color: var(--on-sc); border-radius: 999px; min-width: 54px; }

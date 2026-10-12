@@ -4,106 +4,17 @@
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} return null; }
 
-  /* ---------------- i18n ---------------- */
-  var T = {
-    ru: {
-      skip: "К содержимому",
-      "nav.how": "Как это работает", "nav.features": "Возможности", "nav.screens": "Скриншоты", "nav.plugins": "Плагины", "nav.faq": "Вопросы", "nav.download": "Скачать",
-      "hero.eyebrow": "Лаунчер игр · Windows и Linux", "hero.title": "Выбрал.<br>Скачал.<br>Играй.",
-      "hero.lead": "Arachnel собирает каталог, загрузки и библиотеку в одном окне. На Windows всё просто запускается, на Linux лаунчер сам подтянет Proton и всё нужное.",
-      "cta.win": "Скачать для Windows", "cta.linux": "Linux · AppImage", "cta.all": "Все релизы",
-      "float.search": "Умный поиск", "float.play": "Играть",
-      "m.catalog": "Каталог", "m.discover": "Подборки", "m.library": "Библиотека", "m.friends": "Друзья", "m.downloads": "Загрузки", "m.plugins": "Плагины",
-      "how.eyebrow": "Plug and play", "how.title": "Три шага, и вы в игре", "how.lead": "Никаких настроек системы и ручной возни с запуском.",
-      "how.s1.t": "Выберите игру", "how.s1.d": "Каталог с поиском, который прощает опечатки и понимает кириллицу и латиницу. Фильтры и сортировка под рукой.",
-      "how.s2.t": "Скачайте", "how.s2.d": "Загрузки с понятным прогрессом, установка в выбранную папку, обновления игр в библиотеке.",
-      "how.s3.t": "Нажмите «Играть»", "how.s3.d": "На Windows игра просто стартует. На Linux Arachnel сам настроит Proton, и вам не нужно трогать систему.",
-      "f.eyebrow": "Возможности", "f.title": "Всё нужное, и ничего лишнего",
-      "f.search.t": "Поиск, который понимает", "f.search.d": "Опечатки, раскладка и кириллица вместо латиницы: ищите так, как думаете.",
-      "f.discover.t": "Подборки как лента", "f.discover.d": "Одна игра на экран: трейлер, жанры, «Играть» и «Не моё».",
-      "f.linux.t": "Linux без боли", "f.linux.d": "Proton подтягивается сам. Лаунчер ставится как AppImage, без пакетов и зависимостей.",
-      "f.theme.t": "Ваши цвета", "f.theme.d": "Тёмная и светлая тема, палитры и цвет акцента. Попробуйте прямо здесь.",
-      "f.plugins.t": "Источники через плагины", "f.plugins.d": "В лаунчере нет встроенного каталога: плагин подключает источник и отвечает за скачивание, установку и запуск.",
-      "f.friends.t": "Друзья", "f.friends.d": "Добавляйте друзей по коду и видьте, кто онлайн и во что играет.",
-      "f.keys.t": "Для клавиатуры", "f.keys.d": "Быстрый поиск и переключение разделов без мыши.",
-      "f.lang.t": "Русский и English", "f.lang.d": "Интерфейс переведён, переводы можно улучшать на Weblate.",
-      "s.eyebrow": "Скриншоты", "s.title": "Посмотрите изнутри", "s.catalog": "Каталог", "s.filters": "Фильтры", "s.discover": "Подборки", "s.settings": "Настройки", "s.note": "На скриншотах тестовые данные.",
-      "p.eyebrow": "Плагины", "p.title": "Подключите источник за минуту",
-      "p.lead": "Плагин это маленькая надстройка к источнику. Он наполняет каталог и берёт на себя скачивание, установку и запуск.",
-      "p.s1": "Откройте «Настройки → Плагины → Магазин плагинов»", "p.s2": "Установите плагин из списка, рекомендованные сверху", "p.s3": "Игры появятся в «Каталоге»",
-      "p.sdk": "Написать свой плагин", "p.store": "Магазин плагинов", "p.i1": "Источник игр", "p.i1d": "Каталог, загрузка, установка, запуск", "p.rec": "Рекомендуем",
-      "p.i2": "Ещё один источник", "p.i2d": "Устанавливается так же", "p.install": "Установить", "p.i3": "Установить из файла…",
-      "d.eyebrow": "Скачать", "d.title": "Arachnel для вашей системы", "d.lead": "Свежая сборка всегда на GitHub Releases. Контрольные суммы лежат рядом.",
-      "d.win": "Установщик для Windows 10 и 11", "d.getwin": "Скачать .exe", "d.linux": "AppImage для x86_64: сделайте исполняемым и запускайте", "d.getlinux": "Скачать AppImage",
-      "d.sums": "Контрольные суммы SHA-256", "d.build": "Сборка из исходников",
-      "q.eyebrow": "Вопросы", "q.title": "Коротко о главном",
-      "q.1q": "Есть ли в Arachnel каталог игр?", "q.1a": "Встроенного каталога нет. Источники подключаются плагинами: плагин заполняет «Каталог» и отвечает за скачивание, установку и запуск.",
-      "q.2q": "Как это работает на Linux?", "q.2a": "Лаунчер сам подтягивает Proton и всё, что нужно для запуска, чтобы вам не пришлось настраивать систему вручную.",
-      "q.3q": "Запустится ли любая игра?", "q.3a": "Нет. Игры с DRM или античитом могут не работать. Это зависит от самой игры и источника.",
-      "q.4q": "Куда сообщать об ошибках и идеях?", "q.4a": "В", "q.5q": "Можно ли помочь с переводом?", "q.5a": "Да, переводы живут на",
-      "ft.proj": "Проект", "ft.docs": "Документация",
-      "ft.legal": "Arachnel не хранит и не распространяет игры. Плагины создают сторонние авторы: вы отвечаете за то, что устанавливаете.",
-      "alt.catalog": "Каталог Arachnel: сетка игр, сортировка по дате добавления", "alt.filters": "Лист фильтров каталога", "alt.discover": "Подборки: игра с трейлером и списком «Далее»", "alt.settings": "Настройки внешнего вида"
-    },
-    en: {
-      skip: "Skip to content",
-      "nav.how": "How it works", "nav.features": "Features", "nav.screens": "Screenshots", "nav.plugins": "Plugins", "nav.faq": "FAQ", "nav.download": "Download",
-      "hero.eyebrow": "Game launcher · Windows & Linux", "hero.title": "Pick.<br>Download.<br>Play.",
-      "hero.lead": "Arachnel puts the catalog, downloads and library in one window. On Windows it just runs; on Linux the launcher fetches Proton and everything else it needs.",
-      "cta.win": "Download for Windows", "cta.linux": "Linux · AppImage", "cta.all": "All releases",
-      "float.search": "Smart search", "float.play": "Play",
-      "m.catalog": "Catalog", "m.discover": "Discover", "m.library": "Library", "m.friends": "Friends", "m.downloads": "Downloads", "m.plugins": "Plugins",
-      "how.eyebrow": "Plug and play", "how.title": "Three steps to playing", "how.lead": "No system tweaking, no manual fiddling to get a game to start.",
-      "how.s1.t": "Pick a game", "how.s1.d": "A catalog whose search forgives typos and mixes Cyrillic and Latin. Filters and sorting at hand.",
-      "how.s2.t": "Download it", "how.s2.d": "Downloads with clear progress, installs into the folder you choose, game updates in your library.",
-      "how.s3.t": "Hit Play", "how.s3.d": "On Windows the game simply starts. On Linux Arachnel sets up Proton for you, so you never touch the system.",
-      "f.eyebrow": "Features", "f.title": "Everything you need, nothing you don't",
-      "f.search.t": "Search that gets you", "f.search.d": "Typos, the wrong keyboard layout, Cyrillic instead of Latin: search the way you think.",
-      "f.discover.t": "Discover as a feed", "f.discover.d": "One game per screen: trailer, genres, Play and Not for me.",
-      "f.linux.t": "Linux without pain", "f.linux.d": "Proton is fetched automatically. The launcher ships as an AppImage: no packages, no dependencies.",
-      "f.theme.t": "Your colors", "f.theme.d": "Dark and light themes, palettes and an accent color. Try it right here.",
-      "f.plugins.t": "Sources via plugins", "f.plugins.d": "There is no built-in catalog: a plugin connects a source and handles download, install and launch.",
-      "f.friends.t": "Friends", "f.friends.d": "Add friends by code and see who is online and what they play.",
-      "f.keys.t": "Keyboard-friendly", "f.keys.d": "Quick search and section switching without the mouse.",
-      "f.lang.t": "English & Русский", "f.lang.d": "The interface is translated, and translations can be improved on Weblate.",
-      "s.eyebrow": "Screenshots", "s.title": "Take a look inside", "s.catalog": "Catalog", "s.filters": "Filters", "s.discover": "Discover", "s.settings": "Settings", "s.note": "Screenshots use sample data.",
-      "p.eyebrow": "Plugins", "p.title": "Connect a source in a minute",
-      "p.lead": "A plugin is a small add-on for a source. It fills the catalog and handles download, install and launch.",
-      "p.s1": "Open Settings → Plugins → Plugin store", "p.s2": "Install a plugin from the list, recommended ones on top", "p.s3": "Games show up in Catalog",
-      "p.sdk": "Write your own plugin", "p.store": "Plugin store", "p.i1": "Game source", "p.i1d": "Catalog, download, install, launch", "p.rec": "Recommended",
-      "p.i2": "Another source", "p.i2d": "Installs the same way", "p.install": "Install", "p.i3": "Install from file…",
-      "d.eyebrow": "Download", "d.title": "Arachnel for your system", "d.lead": "The latest build is always on GitHub Releases. Checksums sit next to it.",
-      "d.win": "Installer for Windows 10 and 11", "d.getwin": "Download .exe", "d.linux": "x86_64 AppImage: make it executable and run", "d.getlinux": "Download AppImage",
-      "d.sums": "SHA-256 checksums", "d.build": "Build from source",
-      "q.eyebrow": "FAQ", "q.title": "The short version",
-      "q.1q": "Does Arachnel include a game catalog?", "q.1a": "No built-in catalog. Sources are connected through plugins: a plugin fills the Catalog and handles download, install and launch.",
-      "q.2q": "How does it work on Linux?", "q.2a": "The launcher fetches Proton and whatever else it needs to run games, so you don't have to set the system up by hand.",
-      "q.3q": "Will every game run?", "q.3a": "No. Games with DRM or anti-cheat may not work. It depends on the game and the source.",
-      "q.4q": "Where do I report bugs and ideas?", "q.4a": "On", "q.5q": "Can I help with translations?", "q.5a": "Yes, translations live on",
-      "ft.proj": "Project", "ft.docs": "Docs",
-      "ft.legal": "Arachnel does not host or distribute games. Plugins are made by third parties: you are responsible for what you install.",
-      "alt.catalog": "Arachnel catalog: grid of games sorted by date added", "alt.filters": "Catalog filter sheet", "alt.discover": "Discover: a game with a trailer and an Up next list", "alt.settings": "Appearance settings"
-    }
-  };
-  var lang = "ru";
-  function applyLang(l) {
-    lang = T[l] ? l : "en";
-    root.lang = lang;
-    document.querySelectorAll("[data-i18n]").forEach(function (el) {
-      var v = T[lang][el.getAttribute("data-i18n")];
-      if (v != null) el.innerHTML = v;
-    });
-    document.querySelectorAll("[data-i18n-alt]").forEach(function (el) {
-      var v = T[lang][el.getAttribute("data-i18n-alt")];
-      if (v != null) el.setAttribute("alt", v);
-    });
-    document.title = lang === "ru" ? "Arachnel — лаунчер игр для Windows и Linux" : "Arachnel — game launcher for Windows and Linux";
-    document.querySelectorAll(".seg-btn").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
-    store("ara-lang", lang);
-    detectOS(); // re-apply CTA labels after the text swap
-    restartTyping();
-  }
-  document.querySelectorAll(".seg-btn").forEach(function (b) { b.addEventListener("click", function () { applyLang(b.dataset.lang); }); });
+  /* ---------------- language ---------------- */
+  // The two languages are separate static pages (/ and /en/); the switch is a plain link and
+  // only remembers the choice, so a later first-visit redirect does not fight the user.
+  var lang = root.lang === "ru" ? "ru" : "en";
+  var L = {
+    ru: { win: "Скачать для Windows", linux: "Linux · AppImage", getLinux: "Скачать для Linux", altWin: "Windows · Установщик" },
+    en: { win: "Download for Windows", linux: "Linux · AppImage", getLinux: "Download for Linux", altWin: "Windows · Installer" }
+  }[lang];
+  document.querySelectorAll(".seg-btn[data-lang]").forEach(function (a) {
+    a.addEventListener("click", function () { store("ara-lang", a.dataset.lang); });
+  });
 
   /* ---------------- theme + accent ---------------- */
   var themeBtn = document.getElementById("themeBtn");
@@ -229,8 +140,8 @@
     var mt = document.getElementById("ctaMainText"), at = document.getElementById("ctaAltText");
     var first = linux ? "linux" : "win", second = linux ? "win" : "linux";
     main.href = URLS[first]; alt.href = URLS[second];
-    mt.textContent = first === "win" ? T[lang]["cta.win"] : (lang === "ru" ? "Скачать для Linux" : "Download for Linux");
-    at.textContent = second === "linux" ? T[lang]["cta.linux"] : (lang === "ru" ? "Windows · Установщик" : "Windows · Installer");
+    mt.textContent = first === "win" ? L.win : L.getLinux;
+    at.textContent = second === "linux" ? L.linux : L.altWin;
     main.querySelector("use").setAttribute("href", "#i-" + (first === "win" ? "download" : "download"));
     alt.querySelector("use").setAttribute("href", second === "linux" ? "#i-linux" : "#i-windows");
     document.getElementById("dlWin").classList.toggle("pick", !linux);
@@ -256,5 +167,6 @@
       .catch(function () {});
   } catch (e) {}
 
-  applyLang(store("ara-lang") || root.lang);
+  detectOS();
+  restartTyping();
 })();
